@@ -1,0 +1,24 @@
+{
+  "icon_theme": "Material Icon Theme",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "ui_font_size": 17,
+  "buffer_font_size": 17,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "ui_font_family": "JetBrainsMono Nerd Font",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark Pro"
+  },
+  "assistant": {
+    "enabled": false,
+    "button": false
+  },
+  "features": {
+    "edit_prediction_provider": "none"
+  },
+  "auto_update": false
+}
