@@ -1,4 +1,4 @@
-from libqtile import bar, layout, hook, widget, qtile
+from libqtile import bar, layout, hook, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import subprocess
@@ -42,9 +42,9 @@ def load_wal_colors(cache_path="~/.cache/wal/colors"):
         "fg": colors[7],
         "sel_bg": colors[1],
         "sel_fg": colors[5],
-        "urgent_bg": colors[8],
-        "urgent_fg": colors[0],
-        "border_focus": colors[1],
+        "urgent_bg": colors[3],
+        "urgent_fg": colors[5],
+        "border_focus": colors[6],
         "border_normal": colors[0],
     }
 
@@ -66,7 +66,6 @@ keys = [
     Key([mod, "control"], "down", lazy.layout.grow_down()),
     Key([mod, "control"], "up", lazy.layout.grow_up()),
     Key([mod], "n", lazy.layout.normalize()),
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod], "c", lazy.window.kill()),
@@ -74,7 +73,14 @@ keys = [
     Key([mod], "z", lazy.window.toggle_floating()),
     Key([mod, "shift"], "r", lazy.reload_config()),
     Key([mod, "shift"], "q", lazy.shutdown()),
-    Key([mod], "r", lazy.spawncmd()),
+    Key([mod], "r", lazy.spawn("rofi -show drun")),
+    Key([mod], "s", lazy.spawn("rofi -show window")),
+    Key([mod], "d", lazy.spawn("pcmanfm")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 1")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 1")),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer -t")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 2%-")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 2%+")),
 ]
 
 group_data = [
@@ -90,7 +96,8 @@ group_data = [
     ("agrave", ""),
 ]
 
-groups = [Group(name, layout="monadtall", label=label) for name, label in group_data]
+groups = [Group(name, layout="monadtall", label=label)
+          for name, label in group_data]
 for g in groups:
     keys += [
         Key([mod], g.name, lazy.group[g.name].toscreen()),
@@ -98,10 +105,10 @@ for g in groups:
     ]
 
 layout_theme = {
-    "border_width": 2,
+    "border_width": 3,
     "margin": 4,
     "border_focus": colors["border_focus"],
-    "border_normal": ["border_normal"],
+    "border_normal": colors["border_normal"],
 }
 
 layouts = [
@@ -112,7 +119,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
+    font="JetBrainsMono Nerd Fonts",
     fontsize=12,
     padding=6,
     background=colors["bg"],
@@ -126,12 +133,11 @@ screens = [
         wallpaper_mode="fill",
         top=bar.Bar(
             [
-                widget.CurrentLayoutIcon(scale=0.7, background=colors["bg"]),
+                widget.CurrentLayoutIcon(scale=0.7),
                 widget.Sep(
                     linewidth=1,
                     padding=10,
                     foreground=colors["sel_bg"],
-                    background=colors["bg"],
                 ),
                 widget.GroupBox(
                     fontsize=14,
@@ -145,23 +151,57 @@ screens = [
                     this_current_screen_border=colors["sel_fg"],
                     highlight_method="line",
                     rounded=False,
-                    background=colors["bg"],
                 ),
-                widget.Prompt(prompt="Run: ", **widget_defaults),
                 widget.WindowName(max_chars=30, **widget_defaults),
                 widget.Systray(background=colors["bg"], padding=5),
                 widget.Sep(
                     linewidth=1,
                     padding=10,
                     foreground=colors["sel_bg"],
-                    background=colors["bg"],
                 ),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p", **widget_defaults),
+                widget.ThermalSensor(
+                    foreground=colors["sel_bg"],
+                ),
                 widget.Sep(
                     linewidth=1,
                     padding=10,
                     foreground=colors["sel_bg"],
-                    background=colors["bg"],
+                ),
+                widget.Battery(
+                    foreground=colors["fg"],
+                    full_char="󱟢",
+                    charge_char="󰂊",
+                    discharge_char="󱟞 ",
+                    empty_char="󰂃 ",
+                    format="{char} {percent:2.0%}",
+                    padding=8,
+                ),
+                widget.Sep(
+                    linewidth=1,
+                    padding=10,
+                    foreground=colors["sel_bg"],
+                ),
+                widget.Volume(
+                    foreground=colors["fg"],
+                    padding=8,
+                    get_volume_command="pamixer --get-volume-human",
+                    check_mute_command="pamixer --get-mute",
+                    check_mute_string="true",
+                    volume_down_command="pamixer -d 1",
+                    volume_up_command="pamixer -i 1",
+                    mute_command="pamixer -t",
+                    fmt='  {}',
+                ),
+                widget.Sep(
+                    linewidth=1,
+                    padding=10,
+                    foreground=colors["sel_bg"],
+                ),
+                widget.Clock(format="%Y-%m-%d [%H:%M]", **widget_defaults),
+                widget.Sep(
+                    linewidth=1,
+                    padding=10,
+                    foreground=colors["sel_bg"],
                 ),
                 widget.QuickExit(
                     default_text="⏻",
@@ -172,9 +212,9 @@ screens = [
                 ),
             ],
             28,
-            background=colors["bg"],
             border_width=[0, 0, 2, 0],
-            border_color=[colors["border_normal"]] * 3 + [colors["border_focus"]],
+            border_color=[colors["border_normal"]] *
+            3 + [colors["border_focus"]],
         ),
     ),
 ]
@@ -215,6 +255,6 @@ focus_on_window_activation = "smart"
 reconfigure_screens = True
 auto_minimize = True
 wl_input_rules = None
-wl_xcursor_theme = "gruvbox"
+wl_xcursor_theme = "bloom"
 wl_xcursor_size = 24
 wmname = "LG3D"
