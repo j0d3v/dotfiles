@@ -1,0 +1,118 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 15px;
+}
+
+window#waybar {
+  background-color: rgba(40, 44, 52, 0.5); 
+  color: #abb2bf;
+  transition: background-color 0.5s;
+  border: none;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+button {
+  box-shadow: inset 0 -2px transparent;
+  border: none;
+  border-radius: 0;
+}
+
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -2px #3d7ddb;
+}
+
+/* Workspaces */
+#workspaces button {
+  padding: 0 6px;
+  background-color: transparent;
+  color: #828997;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#workspaces button.focused {
+  background-color: #2c323c;
+  box-shadow: inset 0 -2px #3d7ddb;
+}
+
+#workspaces button.urgent {
+  background-color: #be5046;
+  color: #282828;
+}
+
+/* Widget Base Styles */
+#mode,
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#backlight,
+#network,
+#pulseaudio,
+#temperature,
+#tray,
+#idle_inhibitor,
+#custom-media {
+  padding: 0 8px;
+  margin: 2px 2px;
+  border-radius: 4px;
+  color: #282828;
+  font-weight: bold;
+}
+
+/* Unique Widget Colors with reduced contrast */
+#mode { background-color: #c8b070; } /* was #c18401 */
+#clock { background-color: #7a9fd3; } /* was #3d7ddb */
+#battery { background-color: #b0c99a; } /* was #8ebd6b */
+#cpu { background-color: #d9b796; } /* was #d19a66 */
+#memory { background-color: #d0b570; } /* was #c68a1d */
+#disk { background-color: #c095d6; } /* was #a855c7 */
+#backlight { background-color: #7ac1cb; } /* was #2aa1ae */
+#network { background-color: #e58d96; } /* was #e55561 */
+#pulseaudio { background-color: #e79a50; } /* was #de7300 */
+#temperature { background-color: #d0b570; } /* was #c68a1d */
+#tray { background-color: #3a404a; color: #828997; } /* was #2c323c */
+#idle_inhibitor { background-color: #3a404a; color: #828997; } /* was #2c323c */
+#custom-media { background-color: #7ac1cb; min-width: 100px; } /* was #2aa1ae */
+
+/* States */
+#battery.charging { background-color: #c8b070; } /* was #c18401 */
+#network.disconnected,
+#pulseaudio.muted,
+#temperature.critical,
+#tray > .needs-attention,
+#battery.critical:not(.charging) { background-color: #d68b85; } /* was #be5046 */
+
+#idle_inhibitor.activated {
+  background-color: #c8b070; /* was #c18401 */
+  color: #282828;
+}
+
+@keyframes blink {
+  to { background-color: #c8b070; } /* was #c18401 */
+}
+
+#battery.critical:not(.charging) {
+  animation: blink 0.5s linear infinite;
+}
+
+/* Positioning */
+#window,
+#workspaces {
+  margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}

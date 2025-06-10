@@ -1,0 +1,113 @@
+{
+    "position": "top",
+    //"height": 24,
+   "width": 1900,
+    "spacing": 8,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/scratchpad",
+        "sway/window"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "tray",
+        "temperature",
+        "pulseaudio",
+        "network",
+        "battery",
+        "clock"
+    ],
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": [
+            "",
+            ""
+        ],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "timezone": "Africa/Casablanca",
+        "format": "{:%H:%M} \uf017",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d} \uf017"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C {icon} ",
+        "format": "{temperatureC}°C {icon} ",
+        "format-icons": ""
+    },
+    "battery": {
+        "states": {
+            "full": 100,
+            "good": 95,
+            "warning": 30,
+            "critical": 10
+        },
+        "format": "{capacity}%  ",
+        "format-charging": "{capacity}% ↑",
+        "format-plugged": "{capacity}% ↑",
+        "format-alt": "{time}",
+        "format-good": "{capacity}%  ",
+        "format-full": "{capacity}%  "
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%)  ",
+        "format-ethernet": "{ipaddr}/{cidr} \uf6ff",
+        "tooltip-format": "{ifname} via {gwaddr} ↑",
+        "format-linked": "{ifname} (No IP) ↑",
+        "format-disconnected": "Disconnected 睊",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 1,
+        "format": "{volume}% {icon}  {format_source} ",
+        "format-bluetooth": "{volume}% {icon}B {format_source}",
+        "format-bluetooth-muted": "X {icon}B {format_source}",
+        "format-muted": "\ueb24  {format_source}",
+        "format-source": "{volume}% \uf130",
+        "format-source-muted": "\uf131",
+        "format-icons": {
+            "headphone": "\uf025",
+            "hands-free": "HF",
+            "headset": "\uf7cd",
+            "phone": "PH",
+            "portable": "PT",
+            "car": "CR",
+            "default": [
+                "L",
+                "M",
+                "F"
+            ]
+        },
+        "on-click": "pavucontrol"
+    }
+}
