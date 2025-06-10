@@ -1,0 +1,59 @@
+include $HOME/.config/sway/keys.conf
+include $HOME/.config/sway/rules.conf
+include $HOME/.config/sway/workspaces.conf
+font pango:JetBrainsMono Nerd Font 9
+exec --no-startup-id $HOME/.config/sway/autostart.sh
+
+floating_modifier Mod4
+
+input type:keyboard {
+  xkb_layout fr,ara	
+  xkb_options grp:ralt_rshift_toggle	
+}
+
+input "type:touchpad" {
+    dwt enabled         # disable (touchpad) while typing
+    dwtp enabled        # disable (touchpad) while track pointing
+}
+
+bar {   
+    swaybar_command waybar
+}
+
+output eDP-1 {
+	background ~/wallpapers/road-city.jpg fill
+	resolution 1920x1080
+}
+
+seat * xcursor_theme "Uos" 24
+
+bindsym Mod4+a layout stacking
+bindsym Mod4+w layout tabbed
+bindsym Mod4+e layout toggle split
+
+set $bg            #282c34
+set $bg-inactive   #3e4452
+set $bg-urgent     #e06c75
+set $text          #abb2bf
+set $text-inactive #5c6370
+set $bar           #282c34
+
+client.focused          $bg           $bg          $text          $bg $bg
+client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar $bar
+client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar $bar
+client.urgent           $bg-urgent    $bg-urgent   $text          $bar $bar
+
+gaps inner 5
+blur enable
+blur_radius 3
+corner_radius 10
+blur_xray enable;
+default_border pixel 2
+hide_edge_borders smart
+default_dim_inactive 0.5
+default_floating_border normal 2
+
+layer_effects "wofi" blur enable
+layer_effects "kitty" blur enable
+layer_effects "waybar" blur enable
+layer_effects "notifications" blur enable
