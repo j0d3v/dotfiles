@@ -37,9 +37,8 @@ require('pckr').add {
     'nvim-treesitter/nvim-treesitter',
     'nvim-telescope/telescope-file-browser.nvim',
     'tpope/vim-fugitive',
-    'akinsho/toggleterm.nvim',
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     'akinsho/bufferline.nvim',
-    'jose-elias-alvarez/null-ls.nvim',
+    'stevearc/conform.nvim'
 }

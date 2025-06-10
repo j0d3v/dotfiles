@@ -1,5 +1,6 @@
 local opts = { noremap = true, silent = true }
 local telescope = require("telescope")
+local conform = require("conform")
 local builtin = require("telescope.builtin")
 local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -49,7 +50,11 @@ vim.keymap.set('n', 'gs', builtin.git_status)
 vim.keymap.set('n', '<C-f>', builtin.find_files)
 vim.keymap.set('n', '<C-d>', builtin.diagnostics)
 vim.keymap.set('n', "<A-f>", function()
-    vim.lsp.buf.format { async = true }
+    conform.format({
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 500,
+    })
 end)
 vim.keymap.set('n', "<C-s>", function()
     vim.api.nvim_command(":w")
@@ -62,5 +67,3 @@ vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 vim.keymap.set('n', 'bh', vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set('n', '<C-h>', vim.lsp.buf.rename, bufopts)
 vim.keymap.set('n', 'cp', vim.lsp.buf.code_action, bufopts)
-vim.keymap.set('n', '<A-t>', ":ToggleTerm", bufopts)
-vim.keymap.set('i', '<A-t>', ":ToggleTerm", bufopts)

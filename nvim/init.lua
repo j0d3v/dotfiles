@@ -7,7 +7,7 @@ require("plugins.lualine")
 require("plugins.bufferline")
 require("plugins.treesitter")
 require("plugins.telescope")
-require("plugins.null_ls")
+require("plugins.formatting")
 
 require("onedarkpro").setup({
     options = {
