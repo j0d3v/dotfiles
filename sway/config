@@ -7,8 +7,8 @@ exec --no-startup-id $HOME/.config/sway/autostart.sh
 floating_modifier Mod4
 
 input type:keyboard {
-  xkb_layout fr,ara	
-  xkb_options grp:ralt_rshift_toggle	
+  xkb_layout fr,ara
+  xkb_options "grp:ctrl_space_toggle"
 }
 
 input "type:touchpad" {
@@ -16,12 +16,14 @@ input "type:touchpad" {
     dwtp enabled        # disable (touchpad) while track pointing
 }
 
+exec swayidle -w timeout 600 'gtklock' timeout 605 'swaymsg "output * power off"'
+
 bar {   
     swaybar_command waybar
 }
 
 output eDP-1 {
-	background ~/wallpapers/road-city.jpg fill
+	background ~/wallpapers/sunset_city.jpg fill
 	resolution 1920x1080
 }
 
