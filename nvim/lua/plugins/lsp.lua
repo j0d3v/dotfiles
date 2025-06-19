@@ -13,6 +13,9 @@ local servers = {
     "ts_ls",
     "clangd",
     "jsonls",
+    "gopls",
+    "rust_analyzer",
+    "hls",
 }
 
 for _, lsp in ipairs(servers) do

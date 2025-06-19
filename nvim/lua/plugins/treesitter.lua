@@ -4,7 +4,7 @@ if not ok then return end
 configs.setup({
     ensure_installed = {
         "bash", "c", "css", "go", "html", "javascript", "lua",
-        "markdown", "php", "python", "typescript", "yaml"
+        "markdown", "php", "python", "typescript", "yaml", "cpp", "haskell"
     },
     highlight = {
         enable = true,
