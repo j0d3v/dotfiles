@@ -12,18 +12,26 @@ input type:keyboard {
 }
 
 input "type:touchpad" {
-    dwt enabled         # disable (touchpad) while typing
-    dwtp enabled        # disable (touchpad) while track pointing
+    tap disabled
+    tap_button_map lrm
+    accel_profile adaptive
+    natural_scroll disabled
+    left_handed disabled
+    click_method button_areas
+    middle_emulation disabled
+    scroll_method two_finger
+    dwt enabled
+    dwtp enabled
 }
 
 exec swayidle -w timeout 600 'gtklock' timeout 605 'swaymsg "output * power off"'
 
-bar {   
+bar {
     swaybar_command waybar
 }
 
 output eDP-1 {
-	background ~/wallpapers/sunset_city.jpg fill
+	background ~/Pictures/Wallpapers/sunrise.jpg fill
 	resolution 1920x1080
 }
 
@@ -46,16 +54,16 @@ client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar $bar
 client.urgent           $bg-urgent    $bg-urgent   $text          $bar $bar
 
 gaps inner 5
-blur enable
-blur_radius 3
-corner_radius 10
-blur_xray enable;
+#blur enable
+#blur_radius 3
+#corner_radius 10
+#blur_xray enable;
 default_border pixel 2
 hide_edge_borders smart
-default_dim_inactive 0.5
+#default_dim_inactive 0.5
 default_floating_border normal 2
 
-layer_effects "wofi" blur enable
-layer_effects "kitty" blur enable
-layer_effects "waybar" blur enable
-layer_effects "notifications" blur enable
+#layer_effects "wofi" blur enable
+#layer_effects "kitty" blur enable
+#layer_effects "waybar" blur enable
+#layer_effects "notifications" blur enable
