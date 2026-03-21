@@ -13,7 +13,7 @@ path+=(
 	$HOME/pkgs/bin
 	$HOME/pkgs/node/bin
 	$HOME/pkgs/npm/bin
-	$HOME/pkgs/idea/bin
+	$HOME/pkgs/nvim/bin
 	$HOME/pkgs/go/bin
 	$GOPATH/bin
 	$ANDROID_HOME/platform-tools
